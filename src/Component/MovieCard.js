@@ -2,6 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import StarRatingComponent from 'react-star-rating-component';
+import { Link } from "react-router-dom";
 
 function MovieCard({ movie }) {
   return (
@@ -16,7 +17,9 @@ function MovieCard({ movie }) {
             value={movie.rating} 
           />
         </div>
-        <Button variant="primary">details</Button>
+        <Link to={`/movie/${movie.title}`}>
+        <Button variant="dark"> More details </Button>
+      </Link>
       </Card.Body>
     </Card>
   );

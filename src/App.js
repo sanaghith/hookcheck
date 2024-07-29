@@ -4,6 +4,8 @@ import Navigate from "./Component/Navigate";
 import MovieList from "./Component/MovieList";
 import AddMovies from "./Component/AddMovies";
 import Filter from "./Component/Filtre";
+import { Route, Routes } from "react-router-dom";
+import MovieDetails from "./Component/MovieDetails";
 
 function App() {
   const [movieList, setMovieList] = useState([
@@ -14,6 +16,7 @@ function App() {
       postingURL:
         "https://imgsrc.cineserie.com/2021/05/peaky-blinders-online.jpg?ver=1",
       rating: 5,
+      trailer:"https://www.youtube.com/embed/oVzVdvGIC7U?si=-bJq_muPtrExTz7j",
     },
 
     {
@@ -23,6 +26,7 @@ function App() {
       postingURL:
         "https://fr.web.img6.acsta.net/pictures/19/06/26/19/56/3492704.jpg",
       rating: 4,
+      trailer:"https://www.youtube.com/embed/8j61xZtNKRQ?si=9SVZaF-3020NLvkD",
     },
 
     {
@@ -32,6 +36,7 @@ function App() {
       postingURL:
         "https://m.media-amazon.com/images/M/MV5BYjg0OTY5N2UtZDljZS00NDc2LWI1MDAtMDdmN2Q3OTNkMjA1XkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg",
       rating: 3,
+      trailer:"https://www.youtube.com/embed/lptctjAT-Mk?si=7cSpXwg10Yb970DW",
     },
   ]);
   const [searchInput, setSearchInput] = useState("");
@@ -59,9 +64,11 @@ function App() {
       <div className="my-3 text-start ms-5">
         <Filter handleSearch={handleSearch} handleRateInput={handleRateInput} />
       </div>
-
-      <MovieList data={movieList.filter((elm)=> elm.title.toLowerCase().includes(searchInput.toLowerCase().trim()) && elm.rating >= rating )} />
-    </div>
+      <Routes>
+        <Route path="/" element={<MovieList data={movieList.filter((elm)=> elm.title.toLowerCase().includes(searchInput.toLowerCase().trim()) && elm.rating >= rating )} />}/>
+        <Route path = "/movie/:movieTitle" element={<MovieDetails movieList={movieList}/>} ></Route>
+      </Routes>
+         </div>
     
   );
 }
